@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+motor
+chromadb
+httpx
+python-multipart
+python-dotenv
+pdfplumber
+python-docx
