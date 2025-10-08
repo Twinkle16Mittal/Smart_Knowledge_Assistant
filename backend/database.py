@@ -1,6 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-import cromadb
-from cromadb.config import Settings
+import chromadb
+from chromadb.config import Settings
 from backend.config import MONGO_URI, MONGO_DB, CHROMA_PERSIST_DIR
 
 
@@ -13,7 +13,7 @@ convos_collection = db["conversations"]
 #duckdb -> the embedded database engine (like SQLite, but faster for analytics)
 #Parquet -> Columnar file format used to store vector efficiently on disk
 
-chroma_client = chroma_db.Client(Settings(
+chroma_client = chromadb.Client(Settings(
     chroma_db_impl="duckdb+parquet",
     persist_directory=CHROMA_PERSIST_DIR
 ))
