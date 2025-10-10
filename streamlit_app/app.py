@@ -2,7 +2,7 @@ import streamlit as st
 from utils import upload_documents, list_documents, query_documents
 
 st.set_page_config(page_title="Smart Knowledge Assistant", layout="wide")
-st.title("Smart Knowledge Assistant (FastAPI + Streamlit + Ollama)")
+st.title("Smart Knowledge Assistant)")
 
 tab1, tab2 = st.tabs(["Upload Docs", "Ask Questions"])
 
@@ -32,7 +32,7 @@ with tab2:
             st.markdown("### Answer")
             print(res)
             st.write(res.get("answer", "No answer"))
-            if res.get("sources"):
-                st.markdown("### Sources")
-                for s in res["sources"]:
-                    st.caption(f"-{s.get('source')}(chunk {s.get('chunk_index')})")
+            # if res.get("sources"):
+            #     st.markdown("### Sources")
+            #     for s in res["sources"]:
+            #         st.caption(f"-{s.get('source')}(chunk {s.get('chunk_index')})")
