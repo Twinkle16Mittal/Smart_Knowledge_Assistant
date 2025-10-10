@@ -13,6 +13,7 @@ def chunk_text(text, chunk_size, overlap) -> list:
         end = start+ chunk_size
         chunks.append(text[start:end])
         start = end-overlap
+    print("hello this is the chunk", len(chunks))
     return chunks
 
 def extract_text(file_bytes, ext) -> str:

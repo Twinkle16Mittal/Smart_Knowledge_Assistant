@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 import asyncio
 from datetime import datetime, timezone
-from backend.database import collection, convos_collection
-from backend.config import EMBED_MODEL, LLM_MODEL, TOP_K
-from backend.ollama_client import get_embeddings, generate_response
-from backend.models.schemas import QueryRequest
+from database import collection, convos_collection
+from config import EMBED_MODEL, LLM_MODEL, TOP_K
+from ollama_client import get_embeddings, generate_response
+from models.schemas import QueryRequest
 
 router = APIRouter(prefix="/query", tags=["Query"])
 
@@ -14,11 +14,10 @@ async def query_docs(req: QueryRequest) -> dict:
     get the answer from query
     """
     q = req.query
-    query_emb = (await get_embeddings([q], EMBED_MODEL))[0]
-
+    query_emb = (await get_embeddings([q], EMBED_MODEL))[0]["embedding"]
     def chroma_query():
         return collection.query(
-            query_embedding=[query_emb],
+            query_embeddings=[query_emb],
             n_results=req.top_k or TOP_K,
             include=["documents", "metadatas"]
         )
@@ -27,6 +26,8 @@ async def query_docs(req: QueryRequest) -> dict:
     context = "\n\n".join([f"[{m['source']}] {d}" for d, m in zip(docs, metas)])
     prompt = f"Context:\n{context}\n\nQuestions: {q}\n Answer:"
 
+    print("docs", docs, metas)
+    print(prompt)
     answer = await generate_response(prompt, req.llm_model or LLM_MODEL)
     await convos_collection.insert_one({"query": q, "answer":answer, "created_at": datetime.now(timezone.utc)})
     return {"answer": answer, "sources": metas}
