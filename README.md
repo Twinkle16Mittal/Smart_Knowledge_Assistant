@@ -17,3 +17,15 @@ Built using **FastAPI**, **Streamlit**, **ChromaDB**, and **Ollama** — it’s 
 
 ---
 
+## ⚙️ Tech Stack
+
+| Component | Technology |
+|------------|-------------|
+| LLM Backend | [Ollama](https://ollama.ai) |
+| API Server | FastAPI |
+| Vector Database | ChromaDB |
+| Frontend UI | Streamlit |
+| Database | MongoDB |
+| Containerization | Docker Compose |
+
+---
