@@ -29,3 +29,11 @@ Built using **FastAPI**, **Streamlit**, **ChromaDB**, and **Ollama** — it’s 
 | Containerization | Docker Compose |
 
 ---
+
+## 🧠 Environment Setup
+
+    ### 1. Clone the Repository
+
+    ```bash
+    git clone https://github.com/Twinkle16Mittal/Smart_Knowledge_Assistant.git
+    cd Smart_Knowledge_Assistant
